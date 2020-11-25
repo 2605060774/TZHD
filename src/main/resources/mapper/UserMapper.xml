@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taizhou.taizhou_back.mapper.UserMapper">
+    <resultMap id="navMap" type="com.taizhou.taizhou_back.pojo.Permission">
+            <id column="per_id" property="perId"/>
+            <collection column="per_id" property="perList" select="findNavByParentId" ofType="com.taizhou.taizhou_back.pojo.Permission">
+                <id property="perId" column="per_id"></id>
+                <result  property="path" column="path"></result>
+                <result  property="pId" column="p_id"></result>
+            </collection>
+    </resultMap>
+    <select id="loadNavList" resultMap="navMap">
+        select per_id,p_name,path,p_id from permission where p_id=0
+    </select>
+    <select id="findNavByParentId" resultType="com.taizhou.taizhou_back.pojo.Permission">
+        select per_id,p_name,path,p_id from permission where p_id=#{pId}
+    </select>
+</mapper>
