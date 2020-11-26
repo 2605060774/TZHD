@@ -17,4 +17,9 @@
     <select id="findNavByParentId" resultType="com.taizhou.taizhou_back.pojo.Permission">
         select per_id,p_name,path,p_id from permission where p_id=#{pId}
     </select>
+    <select id="selUserInfoByName" resultType="com.taizhou.taizhou_back.pojo.User">
+        select id,user_name,password from `user` where user_name=#{userName}
+    </select>
+
+
 </mapper>

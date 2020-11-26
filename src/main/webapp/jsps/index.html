@@ -12,14 +12,15 @@
 <body>
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <a href="home.html"><div class="layui-logo">台州公共资源后台管理系统</div></a>
+            <a href="home.html"><div class="layui-logo">台州后台</div></a>
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="index.html">首页</a></li>
             </ul>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
-                    <a href="javascript:login();">
-                        快速登录
+                    <a href="javascript:login();" >
+                        <span id="login_span">快速登录</span>
+
                     </a>
                 </li>
                 <li class="layui-nav-item">
@@ -36,6 +37,34 @@
                 </ul>
             </div>
         </div>
+        <!--内联页面-->
+        <iframe id="iFrame" style="border:0; width:100%; background-color:#FFF; margin-left: 220px"name="iFrame" frameborder="0" src=""></iframe>
     </div>
+    <!--模态框开始-->
+    <div style="display:none" id="login_model">
+        <div style="padding:20px;">
+            <form class="layui-form" action="" id="login_form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="login_userName" name="userName" lay-verify="title" autocomplete="off" placeholder="请输入用户名" class="layui-input" style="width:300px">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" id="login_password" name="password" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input" style="width:300px">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"></label>
+                    <button type="button" class="layui-btn" id="login_btn">登录</button>
+                    <button type="button" class="layui-btn layui-btn-primary" onclick="layer.closeAll()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--模态框结束-->
 </body>
+
 </html>
