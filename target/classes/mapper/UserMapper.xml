@@ -18,7 +18,10 @@
         select per_id,p_name,path,p_id from permission where p_id=#{pId}
     </select>
     <select id="selUserInfoByName" resultType="com.taizhou.taizhou_back.pojo.User">
-        select id,user_name,password from `user` where user_name=#{userName}
+        select u.id,u.user_name,u.password,r.role_name roleName from `user` u,role r,user_role ur WHERE
+        ur.role_id=r.r_id
+        AND ur.user_id=u.id
+        AND u.user_name=#{userName}
     </select>
 
 

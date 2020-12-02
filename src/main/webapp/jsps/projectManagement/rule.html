@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>竞价规则</title>
+    <script src="/jss/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script src="/layui/layui.js"></script>
+</head>
+<body>
+        <div  id="update">
+            <form id="coupon_form" class="layui-form" action="" lay-filter="coupon_form">
+
+                <div class="layui-input-inline">
+                    <input type="hidden" id="orderId" name="orderId" >
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">标的名称：</label>
+                        <div class="layui-input-inline" style="width:785px">
+                            <input type="tel" id="objectName" name="objectName" lay-verify="title" autocomplete="off" class="layui-input" >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">竞价模式：</label>
+                        <div class="layui-input-inline" style="width:327px">
+                            <input type="tel" id="pbPattern" name="pbPattern" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">竞价方式：</label>
+
+                        <div class="layui-input-block" style="width:327px">
+                            <input type="tel" id="groupType" name="groupType" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">使用方式：</label>
+                        <div class="layui-input-inline" style="width:327px">
+                            <input type="tel" id="pbPriority" name="pbPriority" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">优先者：</label>
+
+                        <div class="layui-input-inline" style="width:327px">
+                            <input type="tel" id="pbPreferredBidder" name="pbPreferredBidder" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">报价单位：</label>
+                        <div class="layui-input-inline" style="width:327px">
+                            <input type="tel" id="pbPrice" name="pbPrice" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">手续费：</label>
+                        <div class="layui-input-inline" style="width:327px">
+                            <input type="tel" id="pbServiceCharge" name="pbServiceCharge" lay-verify="title" autocomplete="off" class="layui-input" placeholder="百分比%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">起始价：</label>
+                        <div class="layui-input-inline" style="width:327px">
+                            <input type="tel" id="pbStartingPrice" name="pbStartingPrice" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">加价幅度：</label>
+                        <div class="layui-input-inline" style="width:327px">
+                            <input type="tel" id="pbRange" name="pbRange" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block" id="yichang">
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button type="button" class="layui-btn"   onclick="tijiao()" >提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</body>
+<style>
+
+</style>
+</html>
+<script>
+        function tijiao(){
+            var formData = new FormData($("#coupon_form")[0]);
+            alert(111)
+            console.log(formData)
+            $.ajax({
+                url: "/orojec/biddingRules",
+                data: formData,
+                type: "POST",
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    alert("添加成功");
+
+                }, error: function () {
+                    alert("添加失败");
+                }
+            })
+        }
+
+</script>
+
+

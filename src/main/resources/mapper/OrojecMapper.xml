@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taizhou.taizhou_back.mapper.OrojecMapper">
+
+    <insert id="biddingRules" parameterType="com.taizhou.taizhou_back.pojo.PbRule">
+        insert into
+         pb_rule(pb_pattern,pb_priority,pb_preferred_bidder,pb_price,pb_reserve_price,
+         pb_starting_price,pb_bidding_way,pb_duration,pb_range,pb_service_charge)
+        value
+         (#{pbPattern},#{pbPriority},#{pbPreferredBidder},#{pbPrice},
+        #{pbReservePrice},#{pbStartingPrice},#{pbBiddingWay},#{pbDuration},
+        #{pbRange},#{pbServiceCharge})
+    </insert>
+    <insert id="biddingRules1" parameterType="com.taizhou.taizhou_back.pojo.PbRule">
+         insert into
+         pb_object_info(object_name)
+        value
+         (#{objectName})
+    </insert>
+    <update id="rojecbyId"  parameterType="com.taizhou.taizhou_back.pojo.PbRule">
+         UPDATE pb_item_info SET
+          item_type=#{itemType},
+          item_area=#{itemArea},
+          trad_way=#{tradWay},
+          transferor=#{transferor},
+          agent_name=#{agentName},
+          link_man=#{linkMan}
+          where
+          seq_id=#{seqId}
+    </update>
+
+    <select id="orojecShow" resultType="com.taizhou.taizhou_back.pojo.PbItemInfo">
+        select *
+        from pb_item_info
+        <where>
+            <if test="itemName !=null and itemName !='' ">
+                item_name like "%${itemName}%"
+            </if>
+            <if test="itemCode !=null and itemCode !='' ">
+                item_code like "%${itemCode}%"
+            </if>
+        </where>
+    </select>
+    <select id="orojecshenhe" resultType="com.taizhou.taizhou_back.pojo.PbItemInfo">
+        select *
+        from pb_item_info
+        <where>
+            <if test="itemName !=null and itemName !='' ">
+                item_name like "%${itemName}%"
+            </if>
+            <if test="itemCode !=null and itemCode !='' ">
+                item_code like "%${itemCode}%"
+            </if>
+        </where>
+    </select>
+</mapper>
