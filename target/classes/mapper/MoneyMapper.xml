@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3beichen@localhost.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taizhou.taizhou_back.mapper.MoneyMapper">
+
+    <resultMap id="moneyMap" type="com.taizhou.taizhou_back.pojo.PbItemInfo">
+        <id column="seq_id" property="seqId"></id>
+        <result column="item_name" property="itemName"></result>
+        <result column="item_code" property="itemCode"></result>
+        <result column="object_name" property="objectName"></result>
+        <result column="bid_name" property="bidName"/>
+        <result column="resource_type" property="resourceType"></result>
+        <result column="apply_start_time" property="applyStartTime"></result>
+        <result column="deposit_time" property="depositTime"></result>
+        <result column="bid_start_time" property="bidStartTime"></result>
+    </resultMap>
+    <select id="principalCheck" resultMap="moneyMap">
+        SELECT DISTINCT item.item_code,item.item_name,item.apply_start_time,item.deposit_time,item.resource_type,item.apply_id,
+        object.object_name,object.bid_start_time,app.bid_name
+        FROM pb_item_info item, pb_object_info object, pb_apply_info app,pb_apply_detail_info detail
+        <where>
+         <if test="itemName!=null and itemName!=''">
+             and item.item_name like '%${itemName}%'
+         </if>
+        <if test="resourceType!=null and resourceType!=''">
+            and item.resource_type like '%${resourceType}%'
+        </if>
+         and item.seq_id=object.item_id AND item.seq_id = app.item_id and detail.apply_id=app.seq_id
+         and detail.deposit_back=1
+        </where>
+    </select>
+
+
+    <update id="backMoney">
+        update pb_apply_detail_info set deposit_back='2' where apply_id=#{id}
+    </update>
+
+
+    <select id="normalMoney" resultType="PbItemInfo">
+        SELECT DISTINCT item.item_code,item.item_name,item.item_type,object.object_name,app.bid_name,app.money,
+        detail.deposit_back,detail.back_time,detail.is_return,detail.deposit_pay_status,detail.deposit_time
+        FROM pb_item_info item
+        LEFT JOIN pb_object_info object ON item.seq_id=object.item_id
+        LEFT JOIN pb_apply_info app ON app.item_id=item.seq_id
+        LEFT JOIN pb_apply_detail_info detail ON app.seq_id=detail.apply_id
+        <where>
+            <if test="itemName!=null and itemName!=''">
+                and item.item_name like '%${itemName}%'
+            </if>
+            <if test="depositPayStatus!=null and depositPayStatus!=''">
+                and detail.deposit_pay_status like '%${depositPayStatus}%'
+            </if>
+            <if test="isReturn!=null and isReturn!=''">
+                and detail.is_return like '%${isReturn}%'
+            </if>
+            and detail.is_return=1
+        </where>
+
+    </select>
+
+    <select id="anormalMoney" resultType="PbItemInfo">
+        SELECT item.item_code,item.item_name,item.item_type,object.object_name,app.bid_name,app.money,
+        detail.deposit_back,detail.back_time,detail.is_return,detail.deposit_pay_status,detail.deposit_time
+        FROM pb_item_info item
+        LEFT JOIN pb_object_info object ON item.seq_id=object.item_id
+        LEFT JOIN pb_apply_info app ON app.item_id=item.seq_id
+        LEFT JOIN pb_apply_detail_info detail ON app.seq_id=detail.apply_id
+        <where>
+            <if test="itemName!=null and itemName!=''">
+                and item.item_name like '%${itemName}%'
+            </if>
+            <if test="depositPayStatus!=null and depositPayStatus!=''">
+                and detail.deposit_pay_status like '%${depositPayStatus}%'
+            </if>
+            <if test="isReturn!=null and isReturn!=''">
+                and detail.is_return like '%${isReturn}%'
+            </if>
+            and detail.is_return=3
+        </where>
+    </select>
+
+
+    <select id="financeCheck" resultMap="moneyMap">
+        SELECT DISTINCT item.item_code,item.item_name,item.apply_start_time,item.deposit_time,item.resource_type,item.apply_id,
+        object.object_name,object.bid_start_time,app.bid_name
+        FROM pb_item_info item, pb_object_info object, pb_apply_info app,pb_apply_detail_info detail
+        <where>
+            <if test="itemName!=null and itemName!=''">
+                and item.item_name like '%${itemName}%'
+            </if>
+            <if test="resourceType!=null and resourceType!=''">
+                and item.resource_type like '%${resourceType}%'
+            </if>
+            and item.seq_id=object.item_id AND item.seq_id = app.item_id and detail.apply_id=app.seq_id
+            and detail.is_return=1
+        </where>
+    </select>
+
+    <update id="financeBack">
+        update pb_apply_detail_info set is_return='2' where apply_id=#{applyId}
+    </update>
+
+    <select id="alreadyBack" resultMap="moneyMap">
+        SELECT item.item_code,item.item_name,item.apply_start_time,item.deposit_time,item.resource_type,item.apply_id,
+        object.object_name,object.bid_start_time,app.bid_name
+        FROM pb_item_info item, pb_object_info object, pb_apply_info app,pb_apply_detail_info detail
+        <where>
+            <if test="itemName!=null and itemName!=''">
+                and item.item_name like '%${itemName}%'
+            </if>
+            <if test="resourceType!=null and resourceType!=''">
+                and item.resource_type like '%${resourceType}%'
+            </if>
+            and item.seq_id=object.item_id AND item.seq_id = app.item_id and detail.apply_id=app.seq_id
+            and detail.is_return=2
+        </where>
+    </select>
+
+    <select id="itemShow" resultMap="moneyMap">
+        SELECT DISTINCT item.item_code,item.item_name,item.apply_start_time,item.deposit_time,
+        item.resource_type,item.apply_id,
+        object.object_name,object.bid_start_time,app.bid_name,app.money
+        FROM pb_item_info item, pb_object_info object, pb_apply_info app,pb_apply_detail_info detail
+        <where>
+            <if test="itemName!=null and itemName!=''">
+                and item.item_name like '%${itemName}%'
+            </if>
+            and item.seq_id=object.item_id AND item.seq_id = app.item_id and detail.apply_id=app.seq_id
+            and detail.is_return=1 and detail.deposit_pay_status=1 AND detail.deposit_back=1
+        </where>
+    </select>
+
+    <select id="payMoney" resultMap="moneyMap">
+        SELECT DISTINCT item.item_code,item.item_name,item.apply_start_time,item.deposit_time,item.resource_type,item.apply_id,
+        object.object_name,object.bid_start_time,app.bid_name,app.money,detail.deposit_pay_status
+        FROM pb_item_info item, pb_object_info object, pb_apply_info app,pb_apply_detail_info detail
+        <where>
+            <if test="itemName!=null and itemName!=''">
+                and item.item_name like '%${itemName}%'
+            </if>
+            and item.seq_id=object.item_id AND item.seq_id = app.item_id and detail.apply_id=app.seq_id
+            and detail.is_return=1 and detail.deposit_pay_status=2 AND detail.deposit_back=1
+        </where>
+    </select>
+
+
+</mapper>

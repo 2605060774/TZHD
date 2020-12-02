@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>保证件缴纳详情</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layer/theme/default/layer.css">
+
+    <script src="/layui/jquery-3.2.1.js"></script>
+    <script src="/layer/layer.js"></script>
+
+    <script src="/layui/layui.all.js"></script>
+</head>
+<body class="layui-layout-body">
+<div style="text-align: center;">
+    <div style="width:410px;float:left;margin-left: 50px" >
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">项目编号</label>
+                <div class="layui-input-block">
+                    <span id="itemCode" type="text"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">项目名称</label>
+                <div class="layui-input-block">
+                    <span id="itemName" type="text"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">标的名称</label>
+                <div class="layui-input-block">
+                    <span id="objectName" type="text"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">投标人</label>
+                <div class="layui-input-block">
+                    <span id="bidName" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">资源类型</label>
+                <div class="layui-input-block">
+                    <span id="resourceType" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">报名开始时间</label>
+                <div class="layui-input-block">
+                    <span id="applyStartTime" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">保证金缴纳截止时间</label>
+                <div class="layui-input-block">
+                    <span id="depositTime" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">竞价开始时间</label>
+                <div class="layui-input-block">
+                    <span id="bidStartTime" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">金额</label>
+                <div class="layui-input-block">
+                    <span id="money" type="text"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script>
+    $(function () {
+        var parent_json = eval('('+parent.json+')');//获取父级参数
+        $("#itemCode").html(parent_json.itemCode);
+        $("#itemName").html(parent_json.itemName);
+        $("#objectName").html(parent_json.objectName);
+        $("#bidName").html(parent_json.bidName);
+        $("#resourceType").html(parent_json.resourceType);
+        $("#applyStartTime").html(parent_json.applyStartTime);
+        $("#depositTime").html(parent_json.depositTime);
+        $("#bidStartTime").html(parent_json.bidStartTime);
+        $("#money").html(parent_json.money);
+    })
+
+</script>
+</html>

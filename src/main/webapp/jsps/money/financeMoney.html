@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>财务审核保证金</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layer/theme/default/layer.css">
+
+    <script src="/layui/jquery-3.2.1.js"></script>
+    <script src="/layer/layer.js"></script>
+
+    <script src="/layui/layui.all.js"></script>
+    <script src="/js/principalMoney.js"></script>
+</head>
+<body  class="layui-layout-body">
+<div class="layui-tab layui-tab-card" lay-filter="demo">
+    <ul class="layui-tab-title">
+        <li class="layui-this" lay-id="1">未办理</li>
+        <li lay-id="2">已办理</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 100px;">
+        <div class="layui-tab-item layui-show">
+            <div class="layui-layout layui-layout-admin">
+                <div>
+                    <div class="layui-row" id="layerDemo" style="margin-top: 40px">
+                        <form class="layui-form layui-form-pane" lay-filter="formDemo">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">项目名称</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" autocomplete="off" name="itemName" placeholder="项目名称"
+                                           class="layui-input" >
+                                </div>
+                             <!--   <label class="layui-form-label">资源类型</label>
+                                <div class="layui-input-inline" >
+                                    <select name="resourceType" class="layui-select" style="width: 150px;height: 30px">
+                                        <option value="">-请选择-</option>
+                                        <option value="2" name="">国有资源</option>
+                                        <option value="1">拓展资源</option>
+                                    </select>
+                                </div>-->
+                                <div class="layui-input-inline" style="width: 100px">
+                                    <button class="layui-btn" style="width: 100%;margin-left: 200px" type="button"
+                                            lay-submit lay-filter="selectone">查询
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                    <table class="layui-hide" lay-filter="transant" id="transant"></table>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-row" id="layerDemo1" style="margin-top: 40px">
+                <form class="layui-form layui-form-pane" lay-filter="formDemo">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" autocomplete="off" name="itemName" placeholder="项目名称"
+                                   class="layui-input" >
+                        </div>
+
+                        <div class="layui-input-inline" style="width: 100px">
+                            <button class="layui-btn" style="width: 100%;margin-left: 100px" type="button"
+                                    lay-submit lay-filter="selecttwo">查询
+                            </button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <table class="layui-hide" lay-filter="untransant" id="untransant"></table>
+        </div>
+    </div>
+</div>
+
+<div hidden  id="addCouponDiv">
+    <form id="addCoupon" class="layui-form layui-form-pane" lay-filter="formDemo1">
+
+        <div style="width:410px;float:left;margin-left: 50px" >
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">项目名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" style="width: 130px" name="itemName" id="itemName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">项目编号</label>
+                    <div class="layui-input-block">
+                        <input type="text" style="width: 130px" name="itemCode" id="dateend1" autocomplete="off" class="layui-input">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">标的名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" autocomplete="off" name="objectName"
+                               style="width: 130px"  placeholder="张" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">竞买人</label>
+                    <div class="layui-input-block" style="width: 200px">
+                        <input type="text" autocomplete="off" name="bidName" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="float:left;margin-left: 20px">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">资源类型</label>
+                    <div class="layui-input-block">
+                        <input type="text" autocomplete="off" name="resourceType" placeholder=""
+                               style="width: 130px" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">报名开始时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" autocomplete="off" name="applyStartTime"
+                               style="width: 180px" placeholder="" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">保证金缴纳截止时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" autocomplete="off" name="depositTime"
+                               style="width: 180px" placeholder="" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">竞价开始时间</label>
+                    <div class="layui-input-block" style="width: 130px">
+                        <input type="text" autocomplete="off" name="bidStartTime"
+                               style="width: 180px" placeholder="" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+<script>
+    layui.use(['element', 'table','form'], function () {
+        var element = layui.element;
+        var table = layui.table;
+        var form = layui.form;
+
+        var active = {
+            tabChange:function () {
+                element.tabChange('demo','2')
+            },confirmTrans: function () {
+                //配置一个透明的询问框
+                layer.msg('切换？', {
+                    time: 20000, //20s后自动关闭
+                    btn: [ '知道了']
+                });
+            }
+        };
+
+        var movie1={
+            itemName:"",
+            depositPayStatus:"",
+            isReturn:""
+        }
+        form.on('submit(selectone)',function (data) {
+            movie1.itemName = data.field.itemName;
+            movie1.depositPayStatus = data.field.depositPayStatus;
+            movie1.isReturn = data.field.isReturn;
+
+            table1(movie1);
+        });
+        table1(movie1);
+
+        function table1(movie1){
+            table.render({
+                elem: '#transant'
+                , url: '/money/financeCheck'
+                , method: "post"
+                , where: movie1
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [
+                    [
+
+                        {field: 'applyId', hide: true}
+                        , {field: 'itemCode', width: 150, title: '项目编号'}
+                        , {field: 'itemName', width: 150, title: '项目名称'}
+                        , {field: 'objectName', width: 150, title: '标的名称'}
+                        , {field: 'bidName', width: 150, title: '竞买人'}
+                        , {field: 'resourceType', width: 150, title: '资源类型', templet: function (d) {
+                            if (d.resourceType == '1') {
+                                return "拓展资源";
+                            }
+                            ;
+                            if (d.resourceType == '2') {
+                                return "国有资源";
+                            }
+                            ;
+                        }} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                        , {field: 'applyStartTime', width: 150, title: '报名开始时间'}
+                        , {field: 'depositTime', width: 150, title: '保证金缴纳截止时间'}
+                        , {field: 'bidStartTime', width: 150, title: '竞价开始时间'}
+                        , {field: 'right', title: '操作',toolbar:'#demo3'}
+                    ]
+                ]
+            })
+
+        }
+        table.on('tool(transant)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+            if (layEvent=='update1'){
+                $.ajax({
+                    url: '/money/financeBack',
+                    data:{applyId:data.applyId},
+                    type:"post",
+                    success:function (data) {
+                        if (data){
+                            layer.msg("成功退回");
+                            table.reload("transant",{});
+                        }else {
+                            layer.msg("退回失败");
+                        }
+                    }
+
+                })
+            }
+        })
+
+        var movie2={
+            itemName:"",
+            depositPayStatus:"",
+            isReturn:""
+        }
+        form.on('submit(selecttwo)',function (data) {
+            movie2.itemName = data.field.itemName;
+            movie2.depositPayStatus = data.field.depositPayStatus;
+            movie2.isReturn = data.field.isReturn;
+
+            table2(movie2);
+        });
+        table2(movie2);
+
+        function table2(movie2){
+            table.render({
+                elem: '#untransant'
+                , url: '/money/alreadyBack'
+                , method: "post"
+                , where: movie2
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [
+                    [
+
+                        {field: 'applyId', hide: true}
+                        , {field: 'itemCode', width: 150, title: '项目编号'}
+                        , {field: 'itemName', width: 150, title: '项目名称'}
+                        , {field: 'objectName', width: 150, title: '标的名称'}
+                        , {field: 'bidName', width: 150, title: '竞买人'}
+                        , {field: 'resourceType', width: 150, title: '资源类型', templet: function (d) {
+                            if (d.resourceType == '1') {
+                                return "拓展资源";
+                            }
+                            ;
+                            if (d.resourceType == '2') {
+                                return "国有资源";
+                            }
+                            ;
+                        }} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                        , {field: 'applyStartTime', width: 150, title: '报名开始时间'}
+                        , {field: 'depositTime', width: 150, title: '保证金缴纳截止时间'}
+                        , {field: 'bidStartTime', width: 150, title: '竞价开始时间'}
+
+
+                    ]
+                ]
+            })
+
+            table.on('row(untransant)', function(obj){
+                form.val('formDemo1', {
+                    "itemName": obj.data.itemName,
+                    "itemCode":obj.data.itemCode,
+                    "bidName": obj.data.bidName,
+                    "objectName": obj.data.objectName,
+                    "resourceType": obj.data.resourceType,
+                    "applyStartTime": obj.data.applyStartTime,
+                    "depositTime": obj.data.depositTime,
+                    "bidStartTime":obj.data.bidStartTime,
+                });
+
+                layer.open({
+                    type: 1
+                    ,title: "查看明细" //不显示标题栏
+                    ,closeBtn: false
+                    ,area: ['50%','50%']
+                    ,shade: 0
+                    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,btn: ['关闭']
+                    ,btnAlign: 'c'
+                    ,moveType: 1 //拖拽模式，0或者1
+                    ,content: $("#addCouponDiv")
+
+                });
+            });
+        }
+
+
+    });
+</script>
+<script type="text/html" id="demo3">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="update1">退回保证金</a>
+</script>
+</html>

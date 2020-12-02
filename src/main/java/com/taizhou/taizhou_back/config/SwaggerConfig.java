@@ -51,7 +51,7 @@ public class SwaggerConfig {
                 contact,
                 "XXX",
                 "XXX",
-                new ArrayList<>()
+                new ArrayList()
         );
     }
 

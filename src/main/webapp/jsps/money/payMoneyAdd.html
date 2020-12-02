@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layer/theme/default/layer.css">
+
+    <script src="/layui/jquery-3.2.1.js"></script>
+    <script src="/layer/layer.js"></script>
+
+    <script src="/layui/layui.all.js"></script>
+</head>
+<body class="layui-layout-body">
+<div style="text-align: center;">
+    <div style="width:410px;float:left;margin-left: 50px" >
+
+        <div>
+            <div>
+                <div style="float: left">项目名称</div>
+                <div style="border: solid 1px;width: 100px;float: left">
+                    <span id="itemName" type="text"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">缴费流水号</label>
+                <div class="layui-input-block">
+                    <span id="objectName" type="text"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">支付金额</label>
+                <div class="layui-input-block">
+                    <span id="money" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">缴费历史</label>
+                <div class="layui-input-block">
+                    <span id="applyStartTime" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="layui-form-label">缴纳账号</label>
+                <div class="layui-input-block">
+                    <span id="bankCode" type="text"></span><br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script>
+    $(function () {
+        var parent_json = eval('('+parent.json+')');//获取父级参数
+        $("#itemName").html(parent_json.itemName);
+        $("#objectName").html(parent_json.objectName);
+        $("#bankCode").html(parent_json.bankCode);
+        $("#money").html(parent_json.money);
+    })
+
+</script>
+</html>
