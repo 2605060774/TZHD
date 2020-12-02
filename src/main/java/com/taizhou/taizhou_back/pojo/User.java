@@ -21,6 +21,6 @@ public class User {
   private String corName;
   private String corNum;
 
-
+  private String roleName;
 
 }

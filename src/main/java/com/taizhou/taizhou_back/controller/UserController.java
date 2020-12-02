@@ -39,7 +39,7 @@ public class UserController {
             //提示用户名密码不能为空
             return new BaseResponse(StatusCode.UserNamePasswordNotBlank);
         }
-        BaseResponse<String> baseResponse = new BaseResponse<>(StatusCode.Success);
+        BaseResponse<AuthTokenModel> baseResponse = new BaseResponse<>(StatusCode.Success);
         try {
             //登录并创建token
             baseResponse.setData(userService.authUserAndCreateToken(username,password));

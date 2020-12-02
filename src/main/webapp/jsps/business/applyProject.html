@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layer/theme/default/layer.css">
+    <script src="/layui/jquery-3.2.1.js"></script>
+    <script src="/layer/layer.js"></script>
+    <script src="/layui/layui.all.js"></script>
+    <script src="/js/applyProject.js"></script>
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>台州市公共资源拓展项目交易申请书</legend>
+</fieldset>
+<!--协议信息-->
+<div class="layui-card">
+    <div class="layui-card-header">协议信息</div>
+    <div class="layui-card-body">
+    <form class="layui-form" method="post" action="" id="apply_form"  lay-filter="apply_form" >
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px">项目名称</label>
+            <div class="layui-input-block">
+                <input type="hidden" id="seq_id">
+                <input type="text" name="itemName" id="itemName" lay-verify="title" autocomplete="off" placeholder="请输入项目名称" class="layui-input" style="width:534px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 100px">项目主管部门</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="itemDepName" lay-verify="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 100px">委托方名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="delegateName" lay-verify="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 100px">委托方联系人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="delegateMan" lay-verify="delegateMan" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 100px">委托方联系电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="delegatePhone" lay-verify="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label" style="width: 100px">交易项目简要情况</label>
+            <div class="layui-input-inline"  style="width:534px">
+                <textarea name="itemSummary" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item" id="wait_audit">
+            <label class="layui-form-label"></label>
+            <button type="button" class="layui-btn" id="apply_btn"  lay-filter="btn_filter"><span id="apply_span">提交</span></button>
+            <button type="button" class="layui-btn layui-btn-primary" id="close_btn" onclick="layer.closeAll()">取消</button>
+        </div>
+        <div class="layui-form-item" id="ing_audit">
+            <label class="layui-form-label"></label>
+            <button type="button" class="layui-btn" id="audit_btn" lay-submit="" lay-filter="btn_filter"><span id="audit_span">通过</span></button>
+            <button type="button" class="layui-btn layui-btn-primary" id="audit_fail_btn">未通过</button>
+        </div>
+    </form>
+    </div>
+</div>
+<!--公共附件区-->
+<div class="layui-card">
+    <div class="layui-card-header">公共附件区</div>
+    <div class="layui-card-body">
+        <div class="layui-form-item">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150">
+                    <col width="150">
+                    <col width="200">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>上传格式</th>
+                    <th>文件名</th>
+                    <th>大小</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>权属的证明文件<span style="color: red">*</span></td>
+                    <td>JPG/PNG</td>
+                    <td>文件</td>
+                    <td><3MB</td>
+                    <td>
+                        <button type="button" class="layui-btn" id="test1">上传文件</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>准予交易的有关证明和文件<span style="color: red">*</span></td>
+                    <td>JPG/PNG</td>
+                    <td>文件</td>
+                    <td><3MB</td>
+                    <td>
+                        <button type="button" class="layui-btn" id="test2">上传文件</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>委托书<span style="color: red">*</span></td>
+                    <td>JPG/PNG</td>
+                    <td>文件</td>
+                    <td><3MB</td>
+                    <td>
+                        <button type="button" class="layui-btn" id="test3">上传文件</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>其他相关资料</td>
+                    <td>JPG/PNG</td>
+                    <td>文件</td>
+                    <td><3MB</td>
+                    <td>
+                        <button type="button" class="layui-btn" id="test4">上传文件</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

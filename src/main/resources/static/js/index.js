@@ -21,15 +21,21 @@
                 data:{username:username,password:password},
                 dataType:"json",
                 success:function(data){
-                    localStorage.setItem("Token",data.data);
+                    localStorage.setItem("Token",data.data.accessToken);
+                    localStorage.setItem("roleName",data.data.roleName);
+                    localStorage.setItem("Expire",Date.now());
                     layer.msg("登录成功！");
                     location.reload();
                 }
             })
         })
         var token=localStorage.getItem("Token");
+        var expire=localStorage.getItem("Expire");
         if (token!=null){
             $("#login_span").text("已登录");
+        }
+        if(Date.now()-expire>300000){
+            localStorage.clear();
         }
     })
 //  加载二级菜单

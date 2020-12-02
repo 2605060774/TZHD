@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taizhou.taizhou_back.mapper.UserMapper;
 import com.taizhou.taizhou_back.pojo.AccessTokenDto;
+import com.taizhou.taizhou_back.pojo.AuthTokenModel;
 import com.taizhou.taizhou_back.pojo.Permission;
 import com.taizhou.taizhou_back.pojo.User;
 import com.taizhou.taizhou_back.service.UserService;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String authUserAndCreateToken(String username, String password) throws Exception {
+    public AuthTokenModel authUserAndCreateToken(String username, String password) throws Exception {
         User user = authUser(username,password);
         if (user != null){
             //失效掉以前仍然可以使用的accessToken
@@ -50,7 +51,10 @@ public class UserServiceImpl implements UserService {
             //将token对象存储到redis中
             stringRedisTemplate.opsForValue().set(accessToken, JSON.toJSONString(user));
             stringRedisTemplate.expire(accessToken,3600L,TimeUnit.SECONDS);
-            return accessToken;
+            AuthTokenModel authTokenModel=new AuthTokenModel();
+            authTokenModel.setAccessToken(accessToken);
+            authTokenModel.setRoleName(user.getRoleName());
+            return authTokenModel;
         }
         return null;
     }

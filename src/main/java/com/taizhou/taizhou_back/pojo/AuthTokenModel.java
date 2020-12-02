@@ -17,4 +17,6 @@ public class AuthTokenModel {
     private String accessToken;//token
 
     private Long accessExpire;//过期时间
+
+    private String roleName;//角色名
 }

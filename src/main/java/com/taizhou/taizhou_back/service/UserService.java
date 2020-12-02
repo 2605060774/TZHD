@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
     List<Permission> loadNavList();
 
-    String authUserAndCreateToken(String username, String password) throws Exception;
+    AuthTokenModel authUserAndCreateToken(String username, String password) throws Exception;
 
     BaseResponse validateToken(String accessToken);
 }
